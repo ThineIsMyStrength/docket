@@ -1,0 +1,29 @@
+# Built during the Meta Global AI Developer Hackathon 2026 (26 October to 4 November) with Meta's Muse Code.
+# HM1: module-owned META route fixture. Same adapter shape as config/hackathon/application-hackathon.yml
+# (read-only for this prompt) so the module test validates what the deployment profile binds; the retention
+# key is omitted on purpose, so the route records UNDECLARED. Holds no credential.
+app:
+  accessibility:
+    providers:
+      adapters:
+        - id: meta-vision-1
+          provider: META
+          model: muse-spark-1.3
+          actual-models: [muse-spark-1.3]
+          region: GLOBAL
+          endpoint: https://api.meta.ai/v1/responses
+          capabilities: [FIGURE]
+          input-token-price: 0.00000125
+          output-token-price: 0.00000425
+          image-token-ceiling: 2048
+          credential-property: app.accessibility.providers.credentials.meta-vision-1
+          baa: false
+      tenants:
+        00000000-0000-4000-8000-000000000000:
+          routes: [meta-vision-1]
+          calls: 40
+          pages: 20
+          input-tokens: 1048576
+          output-tokens: 163840
+          cost: 2.50
+          monthly-calls: 2000
